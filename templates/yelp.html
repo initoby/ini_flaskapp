@@ -1,0 +1,42 @@
+<html>
+    <head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="jumbotron">
+            <div class="container">
+                {% if businesses %}
+                    <p>Search Results:</p>
+                    <div class="panel panel-primary">
+                    <!-- List in panel contents -->
+                        <div class="panel-heading panel-success"><h2>Top 3 Business Listings</h2></div>
+                            <ul class="list-group">
+                                {% for item in businesses %}
+                                    <li class="list-group-item list-group-item-success""><h3>{{ item.business }}</h3>
+                                    <li class="list-group-item"><h4>{{ item.phone }}</h4>
+                                    <li class="list-group-item"><h4>{{ item.address[0:] }}</h4>
+                                {% else %}
+                                {% endfor %}
+                            </ul>
+                    </div>
+                    <a class="btn btn-secondary" href="{{ url_for('yelp') }}" role="button"> Search Again »</a>
+                {% else %}
+                    <h2>What are you looking for?</h2>
+                    <form action="/yelp" class="form-inline">
+                        <div class="form-group">
+                            <input type="text" name="term" placeholder="Search Keyword" class="form-control">
+                        </div>
+                    <h2>What's your location?</h2>
+                        <div class="form-group">
+                            <input type="text" name="address" placeholder="City, State" class="form-control">
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+                {% endif %}
+                <a class="btn btn-secondary" href="{{ url_for('index') }}" role="button">Home »</a>
+                <a class="btn btn-secondary" href="{{ url_for('about') }}" role="button">About »</a>
+                <a class="btn btn-secondary" href="{{ url_for('weather') }}" role="button">Find Weather »</a>
+            </div>
+        </div>
+	</body>
+</html>
